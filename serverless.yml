@@ -1,9 +1,18 @@
 # serverless.yml
 
-service: my-express-application
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline #serverless-offline needs to be last in the list
+
 
 custom:
   tableName: 'users-table-${self:provider.stage}'
+  dynamodb:
+    start:
+      migrate: true
+
+service: my-express-application
+
 
 provider:
   name: aws
